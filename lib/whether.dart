@@ -127,7 +127,7 @@ class _whetherScreenState extends State<whetherScreen> {
                                       || data['list'][i+1]['weather'][0]['main']=='Rain'
                                       ?Icons.cloud:Icons.sunny, size: 20,),
                                   SizedBox(height: 10,),
-                                  Text(data['list'][i+1]['main']['temp'].toString()),
+                                  Text('${data['list'][i+1]['main']['temp'].toString()} K'),
 
 
                               ],
