@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,6 +13,7 @@ class whetherScreen extends StatefulWidget {
 class _whetherScreenState extends State<whetherScreen> {
   @override
   double temp=0;
+
 
   Future getCurrentWeather() async{
        try{
@@ -34,6 +35,7 @@ class _whetherScreenState extends State<whetherScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Weather App',
@@ -43,7 +45,9 @@ class _whetherScreenState extends State<whetherScreen> {
         actions: [IconButton(
              icon: Icon(Icons.refresh_rounded),
           onPressed: (){
-              print("refresh..");
+              setState(() {
+
+              });
           },
         )],
       ),
@@ -67,6 +71,8 @@ class _whetherScreenState extends State<whetherScreen> {
           final humidity=data['list'][0]['main']['humidity'];
           final pressure=data['list'][0]['main']['pressure'];
           final wspeed=data['list'][0]['wind']['speed'];
+
+
           return Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -107,19 +113,20 @@ class _whetherScreenState extends State<whetherScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
+
                   children: [
-                    for(int i=0;i<6;i++)
+                     for(int i=0;i<8;i++)
                      SizedBox(
                 width: 100,
+
                        child: Card(
                          elevation: 5,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
+
                               children: [
-
-
-                                  Text(data['list'][i+1]['dt'].toString(), style: TextStyle(
+                                  Text(DateFormat.j().format(DateTime.parse(data['list'][i+1]['dt_txt'])), style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
                                   SizedBox(height: 10,),
@@ -134,11 +141,40 @@ class _whetherScreenState extends State<whetherScreen> {
                             ),
                           ),
                         ),
-                     ),
+                       
+                       // child: ListView.builder(
+                       //   itemCount: 5,
+                       //     itemBuilder: (context,index){
+                       //     final time=DateTime.parse(data['list'][index+1]['dt_txt']);
+                       //       child: Card(
+                       //             elevation: 5,
+                       //              child: Padding(
+                       //                padding: const EdgeInsets.all(8.0),
+                       //                child: Column(
+                       //
+                       //                  children: [
+                       //                      Text(DateFormat.Hm().format(time), style: TextStyle(
+                       //                          fontWeight: FontWeight.bold,
+                       //                          fontSize: 16)),
+                       //                      SizedBox(height: 10,),
+                       //                      Icon(data['list'][index+1]['weather'][0]['main']=='Clouds'
+                       //                          || data['list'][index+1]['weather'][0]['main']=='Rain'
+                       //                          ?Icons.cloud:Icons.sunny, size: 20,),
+                       //                      SizedBox(height: 10,),
+                       //                      Text('${data['list'][index+1]['main']['temp'].toString()} K'),
+                       //
+                       //
+                       //                  ],
+                       //                ),
+                       //              ),
+                       //            );
+
+                       // }),
+                   //  ),
 
 
 
-                  ],
+                     )],
                 ),
               ),
 
