@@ -17,7 +17,7 @@ class _whetherScreenState extends State<whetherScreen> {
 
   Future getCurrentWeather() async{
        try{
-      String city='Dabra';
+      String city='Bhopal';
       final res=await http.get(Uri.parse(
           'http://api.openweathermap.org/data/2.5/forecast?q=$city&APPID=81787ca181824b568c0414e52507e49a'
       ));
