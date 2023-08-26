@@ -13,11 +13,21 @@ class whetherScreen extends StatefulWidget {
 class _whetherScreenState extends State<whetherScreen> {
   @override
   double temp=0;
-
-
+  TextEditingController tec=TextEditingController();
+  String city='';
+  @override
+  void initState() {
+    super.initState();
+    city = 'Bhopal'; // Assign an initial value
+    tec.text = 'Bhopal'; // Set initial value to the TextField
+  }
+  void updateValue() {
+    setState(() {
+      city = tec.text;
+    });
+  }
   Future getCurrentWeather() async{
        try{
-      String city='Bhopal';
       final res=await http.get(Uri.parse(
           'http://api.openweathermap.org/data/2.5/forecast?q=$city&APPID=81787ca181824b568c0414e52507e49a'
       ));
@@ -35,7 +45,6 @@ class _whetherScreenState extends State<whetherScreen> {
   }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Weather App',
@@ -45,9 +54,7 @@ class _whetherScreenState extends State<whetherScreen> {
         actions: [IconButton(
              icon: Icon(Icons.refresh_rounded),
           onPressed: (){
-              setState(() {
 
-              });
           },
         )],
       ),
@@ -77,6 +84,39 @@ class _whetherScreenState extends State<whetherScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              TextField(
+                controller: tec,
+                style: TextStyle(
+                 color: Colors.white,
+                 ),
+            decoration: InputDecoration(
+              hintText: 'Search city weather',
+              hintStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              fillColor: Colors.black,
+              filled: true,
+              suffixIcon: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: (){
+                  setState(() {
+                    updateValue();
+                  });
+                },
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey,
+                    width: 1,
+                    style: BorderStyle.solid,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+            ),
+
+          ),
+              SizedBox(height: 10,),
               SizedBox(
                 width: double.infinity,
                  child:Card(
