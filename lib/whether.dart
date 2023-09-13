@@ -47,7 +47,7 @@ class _whetherScreenState extends State<whetherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather App',
+        title: const Text('Weather App',
           style: TextStyle(
           fontWeight: FontWeight.w500,
         ),),
@@ -62,11 +62,9 @@ class _whetherScreenState extends State<whetherScreen> {
         future: getCurrentWeather(),
         builder: (context,snapshot) {
           if(snapshot.connectionState==ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
-          // if(snapshot.hasData){
-          //   return Center(child: Text('An exception occur !!'));
-          // }
+
           if (snapshot.hasError) {
             return Center(
               child: Text(snapshot.error.toString()),
@@ -86,26 +84,26 @@ class _whetherScreenState extends State<whetherScreen> {
             children: [
               TextField(
                 controller: tec,
-                style: TextStyle(
+                style: const TextStyle(
                  color: Colors.white,
                  ),
             decoration: InputDecoration(
               hintText: 'Search city weather',
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
               fillColor: Colors.black,
               filled: true,
               suffixIcon: IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: (){
                   setState(() {
                     updateValue();
                   });
                 },
               ),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.grey,
                     width: 1,
@@ -126,10 +124,10 @@ class _whetherScreenState extends State<whetherScreen> {
                   child: Column(
                     children: [
                       Text('${curtemp.toString()} K',
-            style: TextStyle(
+            style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
-            ),
+                        ),
                       ),
               SizedBox(height: 15,),
               Icon(cursky=='Clouds'|| cursky=='Rain'?Icons.cloud:Icons.sunny,size: 48,),
@@ -144,7 +142,7 @@ class _whetherScreenState extends State<whetherScreen> {
               ),
 
               SizedBox(height: 12,),
-              Text("Weather Forcast",style: TextStyle(
+              const Text("Weather Forcast",style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
 
@@ -166,7 +164,8 @@ class _whetherScreenState extends State<whetherScreen> {
                             child: Column(
 
                               children: [
-                                  Text(DateFormat.j().format(DateTime.parse(data['list'][i+1]['dt_txt'])), style: TextStyle(
+                                  Text(DateFormat.j().format(DateTime.parse(data['list'][i+1]['dt_txt'])),
+                                      style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
                                   SizedBox(height: 10,),
@@ -181,45 +180,12 @@ class _whetherScreenState extends State<whetherScreen> {
                             ),
                           ),
                         ),
-                       
-                       // child: ListView.builder(
-                       //   itemCount: 5,
-                       //     itemBuilder: (context,index){
-                       //     final time=DateTime.parse(data['list'][index+1]['dt_txt']);
-                       //       child: Card(
-                       //             elevation: 5,
-                       //              child: Padding(
-                       //                padding: const EdgeInsets.all(8.0),
-                       //                child: Column(
-                       //
-                       //                  children: [
-                       //                      Text(DateFormat.Hm().format(time), style: TextStyle(
-                       //                          fontWeight: FontWeight.bold,
-                       //                          fontSize: 16)),
-                       //                      SizedBox(height: 10,),
-                       //                      Icon(data['list'][index+1]['weather'][0]['main']=='Clouds'
-                       //                          || data['list'][index+1]['weather'][0]['main']=='Rain'
-                       //                          ?Icons.cloud:Icons.sunny, size: 20,),
-                       //                      SizedBox(height: 10,),
-                       //                      Text('${data['list'][index+1]['main']['temp'].toString()} K'),
-                       //
-                       //
-                       //                  ],
-                       //                ),
-                       //              ),
-                       //            );
-
-                       // }),
-                   //  ),
-
-
-
                      )],
                 ),
               ),
 
               SizedBox(height: 12,),
-              Text("Additinal Information",style: TextStyle(
+              const Text("Additinal Information",style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
 
@@ -232,7 +198,7 @@ class _whetherScreenState extends State<whetherScreen> {
                   Column(
                     children: [
 
-                      Icon(Icons.water_drop,size:20),
+                      const Icon(Icons.water_drop,size:20),
                       SizedBox(height: 10,),
                       Text('Humidity'),
                       SizedBox(height: 10,),
@@ -248,7 +214,7 @@ class _whetherScreenState extends State<whetherScreen> {
                       SizedBox(height: 10,),
                       Text('Pressure'),
                       SizedBox(height: 10,),
-                      Text(pressure.toString(),style: TextStyle(
+                      Text(pressure.toString(),style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16)),
                     ],
@@ -260,7 +226,7 @@ class _whetherScreenState extends State<whetherScreen> {
                       SizedBox(height: 10,),
                       Text('Wind Speed'),
                       SizedBox(height: 10,),
-                      Text(wspeed.toString(),style: TextStyle(
+                      Text(wspeed.toString(),style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16)),
                     ],
