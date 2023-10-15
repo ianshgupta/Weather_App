@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whether/whether.dart';
 
+import 'SplashScreen.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -13,7 +15,7 @@ class MainApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(useMaterial3: true),
-      home: whetherScreen(),
+      home: Splash(),
     );
   }
 }
